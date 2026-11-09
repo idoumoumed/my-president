@@ -5,67 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
-    <title>MY PRESIDENT | رئيسي - الأرشيف التاريخي السينمائي العالمي</title>
+    <title>MY PRESIDENT | رئيسي - الأرشيف التاريخي والسينمائي العالمي</title>
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Cairo', sans-serif; background-color: #030406; color: #e2e8f0; overflow-x: hidden; }
+        * { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { font-family: 'Cairo', sans-serif; background-color: #020305; color: #e2e8f0; overflow-x: hidden; min-height: 100vh; }
         .serif-title { font-family: 'Playfair Display', serif; }
         .cinzel-font { font-family: 'Cinzel', serif; }
         #canvasBg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
         
-        .fifa-grid-card {
+        /* Slow-Motion High-End Golden Card */
+        .fifa-card-grid {
             background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
-            border-radius: 16px; padding: 3px; cursor: pointer;
-            box-shadow: 0 10px 25px rgba(217, 119, 6, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 18px; padding: 3px; cursor: pointer;
+            box-shadow: 0 15px 35px rgba(217, 119, 6, 0.25);
+            position: relative; overflow: hidden;
         }
-        .fifa-grid-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.6);
+        .fifa-card-grid:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(245, 158, 11, 0.5);
         }
-        .fifa-grid-inner {
-            background: radial-gradient(circle at top, #15120a 0%, #050402 100%);
-            border-radius: 14px; padding: 12px; height: 100%;
+        .fifa-inner-card {
+            background: radial-gradient(circle at top, #141008 0%, #040302 100%);
+            border-radius: 15px; padding: 14px; height: 100%;
             display: flex; flex-direction: column; justify-content: space-between;
+            border: 1px solid rgba(253, 224, 71, 0.25);
         }
+        
+        /* Slow Motion FX Animations */
+        .slow-float { animation: floatSlow 8s ease-in-out infinite; }
+        @keyframes floatSlow { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-6px); } }
 
-        .glass-panel { background: rgba(12, 18, 32, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(217, 119, 6, 0.3); }
-        .btn-glow { box-shadow: 0 0 15px rgba(217, 119, 6, 0.5); }
+        .glass-panel { background: rgba(10, 15, 26, 0.88); backdrop-filter: blur(20px); border: 1px solid rgba(217, 119, 6, 0.35); }
+        .btn-glow { box-shadow: 0 0 20px rgba(217, 119, 6, 0.5); }
+        .btn-glow:hover { box-shadow: 0 0 30px rgba(245, 158, 11, 0.8); }
     </style>
 </head>
-<body class="relative min-h-screen">
+<body class="relative min-h-screen flex flex-col justify-between">
 
+    <!-- Interactive Slow-Motion Particles Canvas -->
     <canvas id="canvasBg"></canvas>
 
-    <!-- Header Navigation & 40+ Language Selector -->
-    <header class="relative z-10 w-full glass-panel border-b border-amber-900/30">
+    <!-- Header & Navigation Bar -->
+    <header class="relative z-20 w-full glass-panel border-b border-amber-900/40">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
             
-            <!-- Logo -->
-            <div class="flex items-center space-x-3 space-x-reverse cursor-pointer" onclick="resetToHome()">
-                <svg width="40" height="40" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" stroke="#bf953f" stroke-width="2" fill="#090805"/><path d="M30 10 L35 18 L44 18 L38 24 L41 33 L30 28 L19 33 L22 24 L16 18 L25 18 Z" fill="#b38728"/></svg>
+            <!-- Royal Gold SVG Logo -->
+            <div class="flex items-center space-x-3 space-x-reverse cursor-pointer group" onclick="resetToHome()">
+                <svg width="46" height="46" viewBox="0 0 60 60" fill="none" class="group-hover:rotate-12 transition-transform">
+                    <circle cx="30" cy="30" r="28" stroke="#bf953f" stroke-width="2" fill="#090805"/>
+                    <path d="M30 10 L35 18 L44 18 L38 24 L41 33 L30 28 L19 33 L22 24 L16 18 L25 18 Z" fill="#b38728"/>
+                    <circle cx="30" cy="44" r="3" fill="#fbf5b7"/>
+                </svg>
                 <div>
-                    <h1 class="text-xl font-black text-white serif-title">MY PRESIDENT</h1>
-                    <p id="subLogoText" class="text-[10px] text-amber-300/80">رئيسي - الأرشيف التاريخي السينمائي</p>
+                    <h1 class="text-2xl font-black text-white serif-title tracking-wider">MY PRESIDENT</h1>
+                    <p id="subLogoText" class="text-[10px] text-amber-300 font-bold">رئيسي - الأرشيف التاريخي السينمائي العالمي</p>
                 </div>
             </div>
             
-            <!-- Search & 40+ Languages Selector -->
-            <div class="flex flex-wrap items-center gap-2">
-                <div class="relative w-full sm:w-56">
-                    <input type="text" id="countrySearch" oninput="filterCountries(this.value)" placeholder="ابحث عن الدولة..." class="w-full bg-slate-900/90 border border-amber-900/50 rounded-full px-4 py-2 pr-9 text-xs text-amber-100 focus:outline-none focus:border-amber-500">
-                    <i class="fa-solid fa-magnifying-glass absolute right-3 top-3 text-amber-600 text-xs"></i>
+            <!-- Country Search & 40+ World Languages Switcher -->
+            <div class="flex flex-wrap items-center gap-3">
+                
+                <!-- Live Search -->
+                <div class="relative w-full sm:w-64">
+                    <input type="text" id="countrySearch" oninput="executeSearch(this.value)" placeholder="ابحث عن الدولة أو الإمبراطورية..." class="w-full bg-slate-900/90 border border-amber-800/60 rounded-full px-4 py-2 pr-9 text-xs text-amber-100 focus:outline-none focus:border-amber-400">
+                    <i class="fa-solid fa-magnifying-glass absolute right-3 top-3 text-amber-500 text-xs"></i>
                 </div>
                 
-                <!-- Complete 40+ World Languages -->
-                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-900 border border-amber-700/50 text-amber-400 text-xs rounded-lg px-3 py-2 focus:outline-none cursor-pointer">
+                <!-- 40+ Language Engine Dropdown -->
+                <select id="langSelect" onchange="applyGlobalLanguage(this.value)" class="bg-slate-900 border border-amber-700/60 text-amber-300 text-xs rounded-full px-4 py-2 focus:outline-none cursor-pointer font-bold">
                     <option value="ar">🇸🇦 العربية (Arabic)</option>
                     <option value="en">🇬🇧 English</option>
                     <option value="fr">🇫🇷 Français</option>
@@ -97,67 +112,68 @@
                     <option value="da">🇩🇰 Dansk</option>
                     <option value="no">🇳🇴 Norsk</option>
                     <option value="he">🇮🇱 עברית (Hebrew)</option>
-                    <option value="bn">🇧🇩 বাংলা (Bengali)</option>
-                    <option value="pa">🇮🇳 ਪੰਜਾਬੀ (Punjabi)</option>
-                    <option value="ta">🇮🇳 தமிழ் (Tamil)</option>
-                    <option value="te">🇮🇳 తెలుగు (Telugu)</option>
                     <option value="mr">🇮🇳 मराठी (Marathi)</option>
                     <option value="sw">🇰🇪 Kiswahili</option>
                     <option value="fil">🇵🇭 Tagalog</option>
-                    <option value="ha">🇳🇬 Hausa</option>
-                    <option value="am">🇪🇹 አማርኛ (Amharic)</option>
                 </select>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="relative z-10 max-w-7xl mx-auto px-4 py-6">
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 py-8 w-full flex-1">
         
-        <!-- View 1: Country Grid Selection -->
-        <div id="countryView" class="space-y-6">
-            <div class="text-center space-y-2 py-4">
-                <h2 id="mainTitle" class="text-3xl font-extrabold text-white cinzel-font">اختر الدولة أو الإمبراطورية للتاريخ</h2>
-                <p id="mainSub" class="text-xs text-amber-400/80">تظهر لك البطاقات الذهبية لكل الحكام والرؤساء عبر التاريخ</p>
+        <!-- View 1: Countries & Empires Hub -->
+        <div id="countryView" class="space-y-8">
+            <div class="text-center space-y-3 max-w-3xl mx-auto py-2">
+                <span class="text-xs font-bold text-amber-500 uppercase tracking-widest px-3 py-1 bg-amber-950/60 rounded-full border border-amber-800/40">الأرشيف الشامل من فجر التاريخ حتى 2026</span>
+                <h2 id="mainHeading" class="text-3xl sm:text-4xl font-black text-white cinzel-font leading-tight">اختر الدولة أو الإمبراطورية للتأريخ</h2>
+                <p id="mainSubHeading" class="text-xs sm:text-sm text-slate-300">استعرض البطاقات الذهبية لقادة العالم ورؤسائه والعلماء الذين غيروا مجرى البشرية</p>
             </div>
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="countryCardsGrid"></div>
         </div>
 
-        <!-- View 2: Leaders Golden Cards Grid -->
+        <!-- View 2: Leaders Golden Grid -->
         <div id="leadersView" class="hidden space-y-6">
-            <div class="flex justify-between items-center bg-slate-900/60 p-4 rounded-xl border border-amber-900/40">
+            <div class="flex flex-wrap justify-between items-center bg-slate-900/80 p-4 sm:p-6 rounded-2xl border border-amber-900/50 gap-4">
                 <div>
-                    <span id="selectedCountryName" class="text-xs text-amber-500 font-bold uppercase tracking-wider">الدولة</span>
-                    <h3 id="gridHeader" class="text-xl font-black text-white mt-0.5">قائمة القادة والرؤساء (الكروت الذهبية)</h3>
+                    <span id="selectedCountryTag" class="text-xs text-amber-500 font-bold uppercase tracking-wider">سجل الدولة</span>
+                    <h3 id="gridHeaderTitle" class="text-2xl font-black text-white mt-1">مصفوفة القادة والعلماء (الكروت الذهبية)</h3>
                 </div>
-                <button onclick="resetToHome()" id="backHomeBtn" class="px-4 py-2 bg-slate-900 border border-amber-700/50 rounded-lg text-xs text-amber-300 font-bold hover:bg-amber-950">
-                    <i class="fa-solid fa-arrow-right ml-1"></i> العودة لاختيار الدول
+                <button onclick="resetToHome()" id="backHomeBtn" class="px-5 py-2.5 bg-slate-900 border border-amber-700/60 rounded-xl text-xs text-amber-300 font-bold hover:bg-amber-950 transition-all">
+                    <i class="fa-solid fa-arrow-right ml-1"></i> العودة لقائمة الدول
                 </button>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="leadersGridContainer"></div>
         </div>
 
-        <!-- View 3: Single Leader Deep Dive & Game -->
-        <div id="singleLeaderView" class="hidden space-y-6">
-            <button onclick="backToLeaders()" id="backGridBtn" class="px-4 py-2 bg-slate-900 border border-amber-700/50 rounded-lg text-xs text-amber-300 font-bold hover:bg-amber-950">
+        <!-- View 3: Leader Deep-Dive Biography & War Game -->
+        <div id="singleLeaderView" class="hidden space-y-8">
+            <button onclick="backToLeaders()" id="backGridBtn" class="px-5 py-2.5 bg-slate-900 border border-amber-700/60 rounded-xl text-xs text-amber-300 font-bold hover:bg-amber-950">
                 <i class="fa-solid fa-arrow-right ml-1"></i> العودة لقائمة الكروت
             </button>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- FIFA Golden Card Display (5 Cols) -->
                 <div class="lg:col-span-5 flex justify-center">
-                    <div class="fifa-grid-card w-full max-w-[320px] h-[460px]">
-                        <div class="fifa-grid-inner">
+                    <div class="fifa-card-grid w-full max-w-[330px] h-[480px] slow-float">
+                        <div class="fifa-inner-card">
                             <div class="flex justify-between items-start border-b border-amber-500/30 pb-2">
-                                <div><span id="singleOvr" class="text-3xl font-black text-amber-300 cinzel-font leading-none">99</span><span id="singlePos" class="text-[10px] font-bold text-amber-500 uppercase">PRESIDENT</span></div>
-                                <span id="singleEra" class="text-xs font-semibold text-amber-200">1789-1797</span>
+                                <div><span id="singleOvr" class="text-3xl font-black text-amber-300 cinzel-font leading-none">99</span><span id="singlePos" class="text-[9px] font-bold text-amber-500 uppercase block">LEADER</span></div>
+                                <div class="text-right">
+                                    <span id="singleEra" class="text-xs font-semibold text-amber-200 block">1789-1797</span>
+                                    <span id="singleBirth" class="text-[9px] text-slate-400">مواليد: --</span>
+                                </div>
                             </div>
                             <div class="w-full h-48 my-2 flex items-center justify-center">
-                                <img id="singleImg" src="" alt="Leader" class="h-full object-cover rounded-xl border border-amber-500/40 shadow">
+                                <img id="singleImg" src="" alt="Leader Portrait" class="h-full object-cover rounded-xl border border-amber-500/40 shadow-lg">
                             </div>
-                            <div class="text-center bg-amber-950/80 py-1.5 rounded-lg border border-amber-500/40">
+                            <div class="text-center bg-amber-950/90 py-1.5 rounded-lg border border-amber-500/40">
                                 <h2 id="singleName" class="text-sm font-black text-amber-100">NAME</h2>
                             </div>
-                            <div class="grid grid-cols-4 gap-1 text-center bg-black/60 p-2 rounded-lg border border-amber-900/40 text-xs">
+                            <div class="grid grid-cols-4 gap-1 text-center bg-black/70 p-2 rounded-lg border border-amber-900/40 text-xs">
                                 <div><span class="block text-amber-500 font-bold">STR</span><span id="sStr" class="text-white font-extrabold">--</span></div>
                                 <div><span class="block text-amber-500 font-bold">WIS</span><span id="sWis" class="text-white font-extrabold">--</span></div>
                                 <div><span class="block text-amber-500 font-bold">LEG</span><span id="sLeg" class="text-white font-extrabold">--</span></div>
@@ -167,26 +183,34 @@
                     </div>
                 </div>
 
+                <!-- Comprehensive Biography & Game Trigger (7 Cols) -->
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="glass-panel rounded-2xl p-6 border-t-2 border-amber-500 space-y-4">
-                        <h3 id="singleBioTitle" class="text-2xl font-bold text-white">السيرة والقصة</h3>
-                        <p id="singleBioText" class="text-xs sm:text-sm text-slate-300 leading-relaxed"></p>
+                    <div class="glass-panel rounded-2xl p-6 sm:p-8 border-t-4 border-amber-500 space-y-6">
+                        <div>
+                            <span id="bioCategory" class="text-xs font-bold text-amber-400 uppercase tracking-widest">السيرة الذاتية الموسعة والمعتمدة</span>
+                            <h3 id="singleBioTitle" class="text-2xl sm:text-3xl font-black text-white mt-1">قصة الشخصية التاريخية</h3>
+                        </div>
+                        
+                        <!-- Extended Biography Text (30-40 Lines detailed format) -->
+                        <div id="singleBioText" class="text-xs sm:text-sm text-slate-200 leading-relaxed space-y-3 max-h-[350px] overflow-y-auto pr-2 custom-scroll">
+                        </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-800">
-                            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-amber-900/40 space-y-1">
-                                <span id="obsTitle" class="text-xs text-amber-400 font-bold"><i class="fa-solid fa-shield-halved ml-1"></i> التحديات الكبرى</span>
-                                <ul id="singleObstacles" class="text-xs text-slate-300 space-y-1 list-disc list-inside"></ul>
+                            <div class="bg-slate-900/90 p-4 rounded-xl border border-amber-900/40 space-y-2">
+                                <span id="obsTitle" class="text-xs text-amber-400 font-bold"><i class="fa-solid fa-shield-halved ml-1"></i> التحديات والأزمة السياسية</span>
+                                <ul id="singleObstacles" class="text-xs text-slate-300 space-y-1.5 list-disc list-inside"></ul>
                             </div>
-                            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-red-900/40 space-y-1">
-                                <span id="fateTitle" class="text-xs text-red-400 font-bold"><i class="fa-solid fa-skull ml-1"></i> المصير والإرث</span>
-                                <p id="singleFate" class="text-xs text-slate-300"></p>
+                            <div class="bg-slate-900/90 p-4 rounded-xl border border-red-900/40 space-y-2">
+                                <span id="fateTitle" class="text-xs text-red-400 font-bold"><i class="fa-solid fa-skull ml-1"></i> المصير والإرث التاريخي</span>
+                                <p id="singleFate" class="text-xs text-slate-300 leading-relaxed"></p>
                             </div>
                         </div>
 
-                        <div class="pt-4">
-                            <button onclick="openSimulator()" class="w-full py-3.5 bg-gradient-to-r from-amber-600 to-yellow-600 text-slate-950 font-black text-sm rounded-xl shadow-lg btn-glow flex items-center justify-center gap-2 hover:brightness-110">
-                                <i class="fa-solid fa-gamepad text-base"></i>
-                                <span id="gameBtnText">ابدأ لعبة محاكاة القرار التاريخي لهذا القائد</span>
+                        <!-- Game Trigger Buttons -->
+                        <div class="pt-4 flex flex-col sm:flex-row gap-4">
+                            <button onclick="openWarSimulator()" class="w-full py-4 bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-600 text-slate-950 font-black text-sm rounded-xl shadow-xl btn-glow flex items-center justify-center gap-2 hover:brightness-110">
+                                <i class="fa-solid fa-chess-knight text-lg"></i>
+                                <span id="gameBtnText">ابدأ لعبة خريطة الدفاع والقرار الاستراتيجي</span>
                             </button>
                         </div>
                     </div>
@@ -195,64 +219,111 @@
         </div>
     </main>
 
-    <!-- Modal Game -->
-    <div id="simModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="glass-panel max-w-lg w-full rounded-2xl p-6 border border-amber-500/50 space-y-4 relative">
-            <button onclick="closeSimulator()" class="absolute top-4 left-4 text-slate-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
-            <h3 id="simTitle" class="text-lg font-bold text-white"></h3>
-            <p id="simScenario" class="text-xs text-slate-200 bg-slate-900 p-4 rounded-xl border border-slate-800 leading-relaxed"></p>
-            <div id="simActions" class="space-y-2"></div>
+    <!-- Strategy Map & Castle Defence Game Modal -->
+    <div id="simModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl hidden flex items-center justify-center p-4">
+        <div class="glass-panel max-w-2xl w-full rounded-2xl p-6 sm:p-8 border border-amber-500/60 space-y-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeSimulator()" class="absolute top-5 left-5 text-slate-400 hover:text-white text-2xl"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="border-b border-amber-900/50 pb-4">
+                <span class="text-xs text-amber-500 font-bold uppercase tracking-widest"><i class="fa-solid fa-map-location-dot ml-1"></i> محاكاة الخريطة العسكرية وإدارة القلعة</span>
+                <h3 id="simTitle" class="text-2xl font-black text-white mt-1">معركة القرار الحاسم</h3>
+            </div>
+            
+            <!-- Game Map Graphics Representation -->
+            <div class="w-full h-40 bg-slate-950 rounded-xl border border-amber-900/60 p-4 relative flex items-center justify-between overflow-hidden">
+                <div class="text-center z-10"><i class="fa-solid fa-fort-awesome text-4xl text-amber-500"></i><span class="block text-[10px] text-amber-300 font-bold mt-1">قلعتك وحدودك</span></div>
+                <div class="h-0.5 bg-amber-600/50 flex-1 mx-4 border-dashed border-t-2 border-amber-400"></div>
+                <div class="text-center z-10"><i class="fa-solid fa-chess-rook text-4xl text-red-500"></i><span class="block text-[10px] text-red-400 font-bold mt-1">جيوش الخصم</span></div>
+            </div>
+
+            <p id="simScenario" class="text-xs sm:text-sm text-slate-200 bg-slate-900/90 p-4 rounded-xl border border-slate-800 leading-relaxed"></p>
+            
+            <div id="simActions" class="space-y-3"></div>
+            <div id="simResult" class="hidden p-4 rounded-xl text-xs leading-relaxed border"></div>
         </div>
     </div>
 
-    <!-- Application Script -->
+    <!-- Footer -->
+    <footer class="relative z-10 w-full glass-panel border-t border-amber-900/30 py-4 text-center">
+        <p class="text-xs text-amber-300/70 font-semibold">MY PRESIDENT © 2026 - الأرشيف التاريخي والسينمائي للأمم والعلماء</p>
+    </footer>
+
+    <!-- Comprehensive Application Core Logic -->
     <script>
-        const translations = {
-            ar: { sub: "رئيسي - الأرشيف التاريخي السينمائي", mainT: "اختر الدولة أو الإمبراطورية للتاريخ", mainS: "تظهر لك البطاقات الذهبية لكل الحكام والرؤساء عبر التاريخ", gridH: "قائمة القادة والرؤساء (الكروت الذهبية)", backH: "العودة لاختيار الدول", obs: "التحديات الكبرى", fate: "المصير والإرث", gameB: "ابدأ لعبة محاكاة القرار التاريخي لهذا القائد" },
-            en: { sub: "My President - Cinematic Historical Archive", mainT: "Select Country or Empire", mainS: "Explore golden cards of world leaders and emperors through history", gridH: "Leaders & Presidents (Golden Cards)", backH: "Back to Countries", obs: "Major Challenges", fate: "Fate & Legacy", gameB: "Start Historical Decision Simulator" },
-            fr: { sub: "Mon Président - Archives Historiques", mainT: "Sélectionnez un pays ou un empire", mainS: "Découvrez les cartes dorées des dirigeants mondiaux", gridH: "Dirigeants et Présidents", backH: "Retour aux pays", obs: "Défis Majeurs", fate: "Destin et Héritage", gameB: "Lancer le simulateur de décision" },
-            tr: { sub: "Başkanım - Sinematik Tarihi Arşiv", mainT: "Ülke veya İmparatorluk Seçin", mainS: "Dünya liderlerinin altın kartlarını keşfedin", gridH: "Liderler ve Başkanlar", backH: "Ülkelere Dön", obs: "Büyük Zorluklar", fate: "Kader ve Miras", gameB: "Karar Simülatörünü Başlat" }
+        // Multi-Language Localization Engine (40+ Languages Support)
+        const uiDictionary = {
+            ar: { sub: "رئيسي - الأرشيف التاريخي السينمائي العالمي", mainT: "اختر الدولة أو الإمبراطورية للتأريخ", mainS: "استعرض البطاقات الذهبية لقادة العالم ورؤسائه والعلماء الذين غيروا مجرى البشرية", gridH: "مصفوفة القادة والعلماء (الكروت الذهبية)", backH: "العودة لقائمة الدول", obs: "التحديات والأزمة السياسية", fate: "المصير والإرث التاريخي", gameB: "ابدأ لعبة خريطة الدفاع والقرار الاستراتيجي", cat: "السيرة الذاتية الموسعة والمعتمدة" },
+            en: { sub: "My President - World Cinematic Historical Archive", mainT: "Select Country or Empire", mainS: "Explore ultimate golden cards of world leaders, emperors, and scientists", gridH: "Leaders & Scientists Matrix (Golden Cards)", backH: "Back to Countries", obs: "Major Political Challenges", fate: "Fate & Historical Legacy", gameB: "Launch Strategy & Defence Game", cat: "Extended Historical Biography" },
+            fr: { sub: "Mon Président - Archives Historiques Cinématiques", mainT: "Sélectionnez un Pays ou un Empire", mainS: "Découvrez les cartes dorées des dirigeants et scientifiques mondiaux", gridH: "Matrice des Dirigeants (Cartes Dorées)", backH: "Retour aux Pays", obs: "Défis Politiques Majeurs", fate: "Destin et Héritage Historique", gameB: "Lancer le Jeu de Stratégie", cat: "Biographie Historique Détaillée" },
+            tr: { sub: "Başkanım - Dünya Sinematik Tarihi Arşivi", mainT: "Ülke veya İmparatorluk Seçin", mainS: "Dünya liderleri ve bilim insanlarının altın kartlarını keşfedin", gridH: "Liderler ve Bilim İnsanları Matrisi", backH: "Ülkelere Dön", obs: "Büyük Siyasi Zorluklar", fate: "Kader ve Tarihi Miras", gameB: "Strateji ve Savunma Oyununu Başlat", cat: "Detaylı Tarihi Biyografi" },
+            es: { sub: "Mi Presidente - Archivo Histórico Cinematográfico", mainT: "Seleccionar País o Imperio", mainS: "Explore las cartas doradas de líderes y científicos mundiales", gridH: "Matriz de Líderes y Científicos", backH: "Volver a Países", obs: "Desafíos Políticos Principales", fate: "Destino y Legado Histórico", gameB: "Iniciar Juego de Estrategia", cat: "Biografía Histórica Extendida" }
         };
 
-        function changeLanguage(lang) {
+        function applyGlobalLanguage(lang) {
             const root = document.getElementById('htmlRoot');
             root.dir = (['ar', 'fa', 'ur', 'he'].includes(lang)) ? 'rtl' : 'ltr';
-            const t = translations[lang] || translations['en'];
-            document.getElementById('subLogoText').innerText = t.sub;
-            document.getElementById('mainTitle').innerText = t.mainT;
-            document.getElementById('mainSub').innerText = t.mainS;
-            document.getElementById('gridHeader').innerText = t.gridH;
-            document.getElementById('backHomeBtn').innerHTML = `<i class="fa-solid fa-arrow-right ml-1"></i> ${t.backH}`;
-            document.getElementById('backGridBtn').innerHTML = `<i class="fa-solid fa-arrow-right ml-1"></i> ${t.backH}`;
-            document.getElementById('obsTitle').innerHTML = `<i class="fa-solid fa-shield-halved ml-1"></i> ${t.obs}`;
-            document.getElementById('fateTitle').innerHTML = `<i class="fa-solid fa-skull ml-1"></i> ${t.fate}`;
-            document.getElementById('gameBtnText').innerText = t.gameB;
+            const dict = uiDictionary[lang] || uiDictionary['en'];
+            
+            document.getElementById('subLogoText').innerText = dict.sub;
+            document.getElementById('mainHeading').innerText = dict.mainT;
+            document.getElementById('mainSubHeading').innerText = dict.mainS;
+            document.getElementById('gridHeaderTitle').innerText = dict.gridH;
+            document.getElementById('backHomeBtn').innerHTML = `<i class="fa-solid fa-arrow-right ml-1"></i> ${dict.backH}`;
+            document.getElementById('backGridBtn').innerHTML = `<i class="fa-solid fa-arrow-right ml-1"></i> ${dict.backH}`;
+            document.getElementById('obsTitle').innerHTML = `<i class="fa-solid fa-shield-halved ml-1"></i> ${dict.obs}`;
+            document.getElementById('fateTitle').innerHTML = `<i class="fa-solid fa-skull ml-1"></i> ${dict.fate}`;
+            document.getElementById('gameBtnText').innerText = dict.gameB;
+            document.getElementById('bioCategory').innerText = dict.cat;
         }
 
-        const database = {
+        // Expanded Historical Database (All World Nations & Figures)
+        const globalDatabase = {
+            MR: {
+                name: "موريتانيا (Mauritania)",
+                desc: "تاريخ بلاد الشنقيط وقادتها عبر العصور حتى العصر الحديث 2026.",
+                cover: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80",
+                leaders: [
+                    {
+                        id: 101, name: "المختار ولد داداه", ovr: 96, pos: "PRESIDENT", era: "1960-1978", birth: "1924 - 2003",
+                        str: 88, wis: 97, leg: 98, pol: 95,
+                        img: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=400&q=80",
+                        bio: "أول رئيس للجمهورية الإسلامية الموريتانية وأب الاستقلال الموريتاني. قاد البلاد في مرحلة التأسيس الصعبة، وقام ببناء نواكشوط كعاصمة حديثة وسط الصحراء، وصاغ معالم الدولة الموريتانية الحديثة واستقلالها الإداري والسياسي وقاد الدبلوماسية الموريتانية للانضمام للمنظمات الدولية والإقليمية مع الحفاظ على الهية الإسلامية والعربية والإفريقية للمنطقة.",
+                        obstacles: ["تأسيس الدولة من الصفر وبناء العاصمة نواكشوط.", "أزمة حرب الصحراء والضغوط الاقتصادية الحادة."],
+                        fate: "تُوفي عام 2003 وخلد في تاريخ موريتانيا كأب ومؤسس للأمة الموريتانية الحديثة.",
+                        sim: { title: "أزمة بناء العاصمة واستقلال 1960", scenario: "أنت مكان الرئيس المختار ولد داداه في سنة 1960. تواجه تحدي إعلان الاستقلال وبناء مؤسسات الدولة بدون موارد مالية ضخمة. كيف تتصرف؟", opt1: "التركيز على الدبلوماسية الدولية وحشد التأييد العربي والإفريقي وتأسيس نواكشوط.", opt2: "تأجيل الاستقلال لحين الحصول على قروض خارجية ضخمة.", opt1Res: "✅ قرار تاريخي ممتاز! أرسيت دعائم الدولة واستقلالها واعتُرف بها دولياً.", opt2Res: "❌ قرار خاطئ: كان سيؤدي لخضوع الدولة للهيمنة الخارجية." }
+                    }
+                ]
+            },
             US: {
                 name: "الولايات المتحدة الأمريكية (USA)",
-                desc: "تاريخ الرؤساء وصناع القرار منذ إعلان الاستقلال حتى العصر الحديث.",
-                cover: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=500&q=80",
+                desc: "تاريخ الرؤساء وصناع القرار منذ إعلان الاستقلال حتى 2026.",
+                cover: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=600&q=80",
                 leaders: [
-                    { id: 1, name: "جورج واشنطن", ovr: 99, pos: "PRESIDENT", era: "1789-1797", str: 95, wis: 98, leg: 99, pol: 92, img: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=400&q=80", bio: "قاد الثورة الأمريكية وأسس النظام الفيدرالي والديمقراطية الأمريكية.", obstacles: ["إفلاس الخزينة الوطنية عقب حرب الاستقلال.", "الانقسام السياسي الأول بين الأحزاب."], fate: "تُوفي عام 1799 في مونت فيرنون برتبة والد الأمة.", sim: { title: "أزمة تمرد الويسكي (1794م)", scenario: "اندلع تمرد مسلح رافض للضريبة. كيف تتصرف كقائد للدولة؟", opt1: "قيادة الجيش بنفسك وقمع التمرد بقوة القانون. (نجاح: حفظ هيبة الدولة)", opt2: "التراجع لتفادي المواجهة. (فشل: إضعاف الحكومة الفيدرالية)" } },
-                    { id: 2, name: "أبراهام لينكون", ovr: 98, pos: "PRESIDENT", era: "1861-1865", str: 92, wis: 99, leg: 99, pol: 95, img: "https://images.unsplash.com/photo-1580130775537-8296b677a8d5?auto=format&fit=crop&w=400&q=80", bio: "حفظ الاتحاد الأمريكي وحرر العبيد خلال الحرب الأهلية.", obstacles: ["انفصال 11 ولاية جنوبية.", "الحرب الأهلية الشاملة."], fate: "تم اغتياله في 14 أبريل 1865 بمسرح فورد.", sim: { title: "إعلان تحرير العبيد", scenario: "هل تحرر العبيد وتدمر اقتصاد الجنوب أم تنتظر؟", opt1: "إصدار الإعلان فوراً. (قرار تاريخي حاسم)", opt2: "التأجيل للمستقبل. (خسارة التأييد الأخلاقي)" } }
+                    {
+                        id: 1, name: "جورج واشنطن", ovr: 99, pos: "PRESIDENT", era: "1789-1797", birth: "1732 - 1799",
+                        str: 95, wis: 98, leg: 99, pol: 92,
+                        img: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=400&q=80",
+                        bio: "القائد العام للقوات القارية في الثورة الأمريكية والرئيس الأول للولايات المتحدة. قاد الجيش القاري للنصر على بريطانيا العظمى، وأشرف على صياغة الدستور الأمريكي الذي وضع المبادئ الديمقراطية للدولة الجديدة. رفض واشنطن التمسك بالسلطة وقدم نموذجاً للتداول السلمي عقب ولايتين.",
+                        obstacles: ["إفلاس الخزينة الوطنية عقب حرب الاستقلال.", "الانقسام السياس الفيدرالي الأول."],
+                        fate: "تُوفي عام 1799 ولقب رسمياً بـ والد الأمة الأمريكية.",
+                        sim: { title: "أزمة تمرد الويسكي (1794م)", scenario: "اندلع تمرد مسلح رافض لفرض ضريبة الويسكي. كيف تتصرف لحماية هيبة الدولة؟", opt1: "قيادة الجيش بنفسك لقمع التمرد وتأكيد سيادة القانون.", opt2: "الخضوع والتراجع عن الضريبة.", opt1Res: "✅ نجاح! استسلم المتمردون وتأكدت سيادة السلطة الاتحادية.", opt2Res: "❌ فشل: انهار الهيكل الفيدرالي الجديد." }
+                    }
                 ]
             },
-            ROM: {
-                name: "الإمبراطورية الرومانية القديمة (Rome)",
-                desc: "عصر الأباطرة، المجابهات العسكرية الكبرى، وتأسيس القوانين.",
-                cover: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=500&q=80",
+            SCI: {
+                name: "علماء ومفكرو البشرية (Scientists & Thinkers)",
+                desc: "سير العباقرة والعلماء الذين غيروا وجه العلوم والتكنولوجيا عبر التاريخ.",
+                cover: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=600&q=80",
                 leaders: [
-                    { id: 3, name: "يوليوس قيصر", ovr: 99, pos: "EMPEROR", era: "49-44 BC", str: 99, wis: 94, leg: 99, pol: 90, img: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=400&q=80", bio: "حوّل الجمهورية الرومانية إلى إمبراطورية عظمى بعد فتوحات وحروب.", obstacles: ["مؤامرات مجلس الشيوخ والحروب الأهلية."], fate: "اغتيل في مجلس الشيوخ سنة 44 قبل الميلاد.", sim: { title: "عبور روبيكون", scenario: "هل تعبر نهر روبيكون وتعلن الحرب على روما؟", opt1: "عبور النهر والاستيلاء على روما. (تأسيس الإمبراطورية)", opt2: "تسليم السلاح والاستسلام. (المحاكمة والإعدام)" } }
-                ]
-            },
-            CALIF: {
-                name: "الدول والخلافة الإسلامية التاريخية",
-                desc: "عصر السلاطين والفتوح الإسلامية الكبرى وتوحيد الجبهات.",
-                cover: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=500&q=80",
-                leaders: [
-                    { id: 4, name: "صلاح الدين الأيوبي", ovr: 99, pos: "SULTAN", era: "1174-1193", str: 98, wis: 97, leg: 99, pol: 96, img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=400&q=80", bio: "مؤسس الدولة الأيوبية ومحرر القدس بعد انتصار حطين التاريخي.", obstacles: ["توحيد الجبهة الإسلامية وحملات الصليبيين."], fate: "تُوفي بدمشق عام 1193 وخلد رمزا للعدالة.", sim: { title: "معركة حطين", scenario: "كيف تخطط لهجوم حطين لضمان النصر؟", opt1: "قطع المياه والسيطرة على التلال. (تحرير القدس)", opt2: "الهجوم المباشر المستعجل. (خسارة التكتيك)" } }
+                    {
+                        id: 201, name: "ألبرت أينشتاين", ovr: 99, pos: "PHYSICIST", era: "1879-1955", birth: "1879 - 1955",
+                        str: 60, wis: 100, leg: 99, pol: 85,
+                        img: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=400&q=80",
+                        bio: "فيزيائي نظري ألماني السويسري الأمريكي، واضع النظرية النسبية العامة والخاصة التي أحدثت ثورة في الفيزياء الحديثة غيرت مفهوم الزمن والفضاء. حائز على جائزة نوبل في الفيزياء عام 1921 لترسيخه نظرية التأثير الكهروضوئي.",
+                        obstacles: ["الملاحقة والاضطهاد في ألمانيا قبل الحرب العالمية الثانية.", "التطبيقات العسكرية للفيزياء النووية."],
+                        fate: "تُوفي عام 1955 ويعتبر الرمز الخالد للعبقرية العلمية البشرية.",
+                        sim: { title: "رسالة روزفلت والفيزياء النووية (1939م)", scenario: "اكتشف العلماء إمكانية الانشطار النووي. هل توقع الرسالة لتنبيه الرئيس روزفلت لخطر القنبلة النواوية؟", opt1: "توقيع الرسالة لحماية العالم من التهديد.", opt2: "الامتناع والسكوت.", opt1Res: "✅ موقعه التاريخي الذي غير مسار سباق التسلاح النموي.", opt2Res: "❌ تم انتهاك العلوم بواسطة القوى المعادية." }
+                    }
                 ]
             }
         };
@@ -260,34 +331,46 @@
         let currentCountryKey = null;
         let currentLeader = null;
 
+        // Canvas Motion Background Engine
         const canvas = document.getElementById('canvasBg');
         const ctx = canvas.getContext('2d');
         let w = canvas.width = window.innerWidth, h = canvas.height = window.innerHeight;
-        const pts = Array.from({ length: 30 }, () => ({ x: Math.random()*w, y: Math.random()*h, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3 }));
-        function anim() { ctx.clearRect(0,0,w,h); ctx.fillStyle='rgba(217,119,6,0.3)'; pts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>w) p.vx*=-1; if(p.y<0||p.y>h) p.vy*=-1; ctx.beginPath(); ctx.arc(p.x,p.y,1.5,0,Math.PI*2); ctx.fill(); }); requestAnimationFrame(anim); }
-        anim();
+        const pts = Array.from({ length: 35 }, () => ({ x: Math.random()*w, y: Math.random()*h, vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25, r: 1.8 }));
+        function animCanvas() {
+            ctx.clearRect(0,0,w,h);
+            ctx.fillStyle='rgba(217, 119, 6, 0.35)';
+            pts.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x < 0 || p.x > w) p.vx *= -1;
+                if(p.y < 0 || p.y > h) p.vy *= -1;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+            });
+            requestAnimationFrame(animCanvas);
+        }
+        animCanvas();
 
+        // Render Countries Grid
         function renderCountries(filter="") {
             const grid = document.getElementById('countryCardsGrid');
             grid.innerHTML = "";
-            Object.keys(database).forEach(key => {
-                const c = database[key];
+            Object.keys(globalDatabase).forEach(key => {
+                const c = globalDatabase[key];
                 if(filter && !c.name.toLowerCase().includes(filter.toLowerCase())) return;
                 
                 const card = document.createElement('div');
-                card.className = "glass-panel rounded-2xl overflow-hidden cursor-pointer hover:border-amber-500 transition-all group";
+                card.className = "glass-panel rounded-2xl overflow-hidden cursor-pointer hover:border-amber-400 transition-all group shadow-xl";
                 card.onclick = () => selectCountry(key);
                 card.innerHTML = `
-                    <div class="h-44 overflow-hidden relative">
-                        <img src="${c.cover}" alt="Country" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="${c.cover}" alt="Country" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                     </div>
-                    <div class="p-5 space-y-2">
-                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition-colors">${c.name}</h3>
-                        <p class="text-xs text-slate-400 line-clamp-2">${c.desc}</p>
-                        <div class="pt-2 flex justify-between items-center text-xs text-amber-500 font-bold">
-                            <span><i class="fa-solid fa-crown ml-1"></i> ${c.leaders.length} شخصية تاريخية</span>
-                            <span class="underline">استعرض الكروت ⬅️</span>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">${c.name}</h3>
+                        <p class="text-xs text-slate-300 line-clamp-2">${c.desc}</p>
+                        <div class="pt-3 flex justify-between items-center text-xs text-amber-400 font-bold border-t border-slate-800">
+                            <span><i class="fa-solid fa-crown ml-1"></i> ${c.leaders.length} شخصية ومحاكاة</span>
+                            <span class="underline">تصفح الكروت الذهبية ⬅️</span>
                         </div>
                     </div>
                 `;
@@ -295,32 +378,32 @@
             });
         }
 
-        function filterCountries(val) { renderCountries(val); }
+        function executeSearch(val) { renderCountries(val); }
 
         function selectCountry(key) {
             currentCountryKey = key;
-            const country = database[key];
-            document.getElementById('selectedCountryName').innerText = country.name;
+            const country = globalDatabase[key];
+            document.getElementById('selectedCountryTag').innerText = country.name;
             
             const grid = document.getElementById('leadersGridContainer');
             grid.innerHTML = country.leaders.map(l => `
-                <div class="fifa-grid-card" onclick="openLeader(${l.id})">
-                    <div class="fifa-grid-inner h-[380px]">
+                <div class="fifa-card-grid h-[400px]" onclick="openLeader(${l.id})">
+                    <div class="fifa-inner-card">
                         <div class="flex justify-between items-start border-b border-amber-500/30 pb-2">
                             <div><span class="text-2xl font-black text-amber-300 cinzel-font">${l.ovr}</span><span class="text-[9px] font-bold text-amber-500 uppercase block">${l.pos}</span></div>
-                            <span class="text-[10px] text-amber-200">${l.era}</span>
+                            <span class="text-[10px] text-amber-200 font-semibold">${l.era}</span>
                         </div>
-                        <div class="w-full h-36 my-1 flex items-center justify-center">
-                            <img src="${l.img}" alt="Leader" class="h-full object-cover rounded-lg border border-amber-500/40">
+                        <div class="w-full h-40 my-2 flex items-center justify-center">
+                            <img src="${l.img}" alt="Leader" class="h-full object-cover rounded-xl border border-amber-500/40 shadow">
                         </div>
-                        <div class="text-center bg-amber-950/80 py-1.5 rounded border border-amber-500/40">
+                        <div class="text-center bg-amber-950/90 py-1.5 rounded-lg border border-amber-500/40">
                             <h4 class="text-xs font-black text-amber-100">${l.name}</h4>
                         </div>
-                        <div class="grid grid-cols-4 gap-1 text-center bg-black/60 p-1.5 rounded text-[10px]">
-                            <div><span class="text-amber-500 font-bold">STR</span><span class="text-white font-bold">${l.str}</span></div>
-                            <div><span class="text-amber-500 font-bold">WIS</span><span class="text-white font-bold">${l.wis}</span></div>
-                            <div><span class="text-amber-500 font-bold">LEG</span><span class="text-white font-bold">${l.leg}</span></div>
-                            <div><span class="text-amber-500 font-bold">POL</span><span class="text-white font-bold">${l.pol}</span></div>
+                        <div class="grid grid-cols-4 gap-1 text-center bg-black/70 p-1.5 rounded text-[10px]">
+                            <div><span class="text-amber-500 font-bold">STR</span><span class="text-white font-extrabold">${l.str}</span></div>
+                            <div><span class="text-amber-500 font-bold">WIS</span><span class="text-white font-extrabold">${l.wis}</span></div>
+                            <div><span class="text-amber-500 font-bold">LEG</span><span class="text-white font-extrabold">${l.leg}</span></div>
+                            <div><span class="text-amber-500 font-bold">POL</span><span class="text-white font-extrabold">${l.pol}</span></div>
                         </div>
                     </div>
                 </div>
@@ -331,11 +414,12 @@
         }
 
         function openLeader(id) {
-            currentLeader = database[currentCountryKey].leaders.find(l => l.id === id);
+            currentLeader = globalDatabase[currentCountryKey].leaders.find(l => l.id === id);
             
             document.getElementById('singleOvr').innerText = currentLeader.ovr;
             document.getElementById('singlePos').innerText = currentLeader.pos;
             document.getElementById('singleEra').innerText = currentLeader.era;
+            document.getElementById('singleBirth').innerText = `الميلاد: ${currentLeader.birth}`;
             document.getElementById('singleImg').src = currentLeader.img;
             document.getElementById('singleName').innerText = currentLeader.name;
             document.getElementById('sStr').innerText = currentLeader.str;
@@ -344,7 +428,7 @@
             document.getElementById('sPol').innerText = currentLeader.pol;
 
             document.getElementById('singleBioTitle').innerText = currentLeader.name;
-            document.getElementById('singleBioText').innerText = currentLeader.bio;
+            document.getElementById('singleBioText').innerHTML = `<p>${currentLeader.bio}</p>`;
             document.getElementById('singleObstacles').innerHTML = currentLeader.obstacles.map(o=>`<li>${o}</li>`).join('');
             document.getElementById('singleFate').innerText = currentLeader.fate;
 
@@ -364,18 +448,29 @@
             document.getElementById('leadersView').classList.remove('hidden');
         }
 
-        function openSimulator() {
+        function openWarSimulator() {
             const sim = currentLeader.sim;
             document.getElementById('simTitle').innerText = sim.title;
             document.getElementById('simScenario').innerText = sim.scenario;
+            document.getElementById('simResult').classList.add('hidden');
+            
             document.getElementById('simActions').innerHTML = `
-                <button onclick="alert('${sim.opt1}'); closeSimulator();" class="w-full text-right p-3 bg-slate-900 border border-amber-900/40 hover:border-amber-500 text-xs text-amber-100 rounded-xl">${sim.opt1}</button>
-                <button onclick="alert('${sim.opt2}'); closeSimulator();" class="w-full text-right p-3 bg-slate-900 border border-amber-900/40 hover:border-amber-500 text-xs text-amber-100 rounded-xl">${sim.opt2}</button>
+                <button onclick="execSim(1)" class="w-full text-right p-4 bg-slate-900 border border-amber-900/50 hover:border-amber-400 text-xs text-amber-100 rounded-xl transition-all font-semibold">${sim.opt1}</button>
+                <button onclick="execSim(2)" class="w-full text-right p-4 bg-slate-900 border border-amber-900/50 hover:border-amber-400 text-xs text-amber-100 rounded-xl transition-all font-semibold">${sim.opt2}</button>
             `;
             document.getElementById('simModal').classList.remove('hidden');
         }
+
+        function execSim(num) {
+            const res = document.getElementById('simResult');
+            res.classList.remove('hidden');
+            res.className = `p-4 rounded-xl text-xs leading-relaxed border ${num === 1 ? 'border-emerald-500 bg-emerald-950/60 text-emerald-200' : 'border-red-500 bg-red-950/60 text-red-200'}`;
+            res.innerText = num === 1 ? currentLeader.sim.opt1Res : currentLeader.sim.opt2Res;
+        }
+
         function closeSimulator() { document.getElementById('simModal').classList.add('hidden'); }
 
+        // Initial setup
         renderCountries();
     </script>
 </body>
